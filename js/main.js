@@ -5,6 +5,27 @@
   var prefersReducedMotion =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Page loader — hide once everything is ready (short beat so the tooth
+  // animation reads as intentional, hard cap so it can never get stuck)
+  (function () {
+    var shownAt = Date.now();
+    var minShow = prefersReducedMotion ? 0 : 700;
+    var done = false;
+    function hideLoader() {
+      if (done) return;
+      done = true;
+      var wait = Math.max(0, minShow - (Date.now() - shownAt));
+      setTimeout(function () {
+        document.documentElement.classList.remove("is-loading");
+        var loader = document.getElementById("loader");
+        if (loader) setTimeout(function () { loader.remove(); }, 600);
+      }, wait);
+    }
+    if (document.readyState === "complete") hideLoader();
+    else window.addEventListener("load", hideLoader);
+    setTimeout(hideLoader, 2500);
+  })();
+
   // Current year in footer
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -85,6 +106,7 @@
   }
   stagger(".cards");
   stagger(".steps");
+  stagger(".pricing");
   stagger(".roles__list");
   stagger(".stats__grid");
   stagger(".showcase__points");
@@ -155,7 +177,7 @@
     });
   }
 
-  // Gentle 3D tilt on the hero screenshot while the pointer moves over it
+  // 3D tilt on the hero screenshot with a glare highlight tracking the pointer
   var heroDevice = document.getElementById("heroDevice");
   if (heroDevice && finePointer && !prefersReducedMotion) {
     var raf = null;
@@ -165,17 +187,102 @@
         var rect = heroDevice.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width - 0.5;
         var py = (e.clientY - rect.top) / rect.height - 0.5;
+        heroDevice.classList.add("is-tilting");
         heroDevice.style.transform =
-          "perspective(1200px) rotateX(" + (-py * 3.5).toFixed(2) + "deg) rotateY(" + (px * 3.5).toFixed(2) + "deg)";
+          "perspective(1100px) rotateX(" + (-py * 7).toFixed(2) + "deg) rotateY(" + (px * 7).toFixed(2) + "deg) scale(1.012)";
+        heroDevice.style.setProperty("--gx", ((px + 0.5) * 100).toFixed(1) + "%");
+        heroDevice.style.setProperty("--gy", ((py + 0.5) * 100).toFixed(1) + "%");
         raf = null;
       });
     });
     heroDevice.addEventListener("pointerleave", function () {
+      heroDevice.classList.remove("is-tilting");
       heroDevice.style.transition = "transform .6s cubic-bezier(.16,1,.3,1)";
-      heroDevice.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+      heroDevice.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) scale(1)";
       setTimeout(function () { heroDevice.style.transition = ""; }, 600);
     });
   }
+
+  // Testimonial slider: snap scrolling with arrows, paged dots and drag
+  (function () {
+    var track = document.getElementById("quoteTrack");
+    var prev = document.getElementById("quotePrev");
+    var next = document.getElementById("quoteNext");
+    var dotsWrap = document.getElementById("quoteDots");
+    if (!track || !prev || !next || !dotsWrap) return;
+
+    function pageWidth() { return track.clientWidth; }
+    function pageCount() {
+      return Math.max(1, Math.ceil((track.scrollWidth - track.clientWidth) / pageWidth()) + 1);
+    }
+    function currentPage() {
+      return Math.round(track.scrollLeft / pageWidth());
+    }
+
+    var dots = [];
+    function buildDots() {
+      dotsWrap.innerHTML = "";
+      dots = [];
+      var n = pageCount();
+      for (var i = 0; i < n; i++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("role", "tab");
+        b.setAttribute("aria-label", "Go to testimonials page " + (i + 1));
+        (function (idx) {
+          b.addEventListener("click", function () {
+            track.scrollTo({ left: idx * pageWidth(), behavior: prefersReducedMotion ? "auto" : "smooth" });
+          });
+        })(i);
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      }
+      update();
+    }
+    function update() {
+      var page = currentPage();
+      dots.forEach(function (d, i) { d.classList.toggle("is-active", i === page); });
+      var max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    }
+    function go(dir) {
+      track.scrollBy({ left: dir * pageWidth(), behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+    prev.addEventListener("click", function () { go(-1); });
+    next.addEventListener("click", function () { go(1); });
+    track.addEventListener("scroll", function () { requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", buildDots);
+
+    // Drag-to-scroll with the mouse (touch scrolls natively)
+    var dragging = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse") return;
+      dragging = true; moved = false;
+      startX = e.clientX; startScroll = track.scrollLeft;
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) {
+        moved = true;
+        track.classList.add("is-dragging");
+      }
+      if (moved) track.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener("pointerup", function () {
+      if (!dragging) return;
+      dragging = false;
+      if (moved) {
+        // settle onto the nearest page
+        var page = Math.round(track.scrollLeft / pageWidth());
+        track.classList.remove("is-dragging");
+        track.scrollTo({ left: page * pageWidth(), behavior: prefersReducedMotion ? "auto" : "smooth" });
+      }
+    });
+
+    buildDots();
+  })();
 
   // Demo form: client-side validation + friendly confirmation
   var form = document.getElementById("demoForm");
@@ -185,10 +292,17 @@
       e.preventDefault();
       var name = form.name.value.trim();
       var email = form.email.value.trim();
+      var phone = form.phone.value.trim();
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      var phoneOk = /^\+?[0-9][0-9\s\-()]{8,14}$/.test(phone);
 
       if (!name || !emailOk) {
         note.textContent = "Please add your name and a valid work email.";
+        note.className = "form__note err";
+        return;
+      }
+      if (!phoneOk) {
+        note.textContent = "Please add a valid mobile number so we can reach you.";
         note.className = "form__note err";
         return;
       }

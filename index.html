@@ -9,9 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
-  <script>document.documentElement.classList.add("js");</script>
+  <script>document.documentElement.classList.add("js", "is-loading");</script>
 </head>
 <body>
+  <!-- ===== Page loader ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <svg class="loader__tooth" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path class="loader__tooth-ghost" d="M12 5.5c-1.7-1.3-3.4-1.8-4.9-1.4C4.8 4.7 3.5 6.7 3.5 9.4c0 2.2.7 4.5 1.6 6.7.5 1.2.8 2.4 1.4 3.4.4.7 1.2.8 1.6.1.5-.9.7-2 .9-3 .2-1 .5-1.6 1-1.6s.8.6 1 1.6c.2 1 .4 2.1.9 3 .4.7 1.2.6 1.6-.1.6-1 .9-2.2 1.4-3.4.9-2.2 1.6-4.5 1.6-6.7 0-2.7-1.3-4.7-3.6-5.3C15.4 3.7 13.7 4.2 12 5.5Z"/>
+        <path class="loader__tooth-draw" d="M12 5.5c-1.7-1.3-3.4-1.8-4.9-1.4C4.8 4.7 3.5 6.7 3.5 9.4c0 2.2.7 4.5 1.6 6.7.5 1.2.8 2.4 1.4 3.4.4.7 1.2.8 1.6.1.5-.9.7-2 .9-3 .2-1 .5-1.6 1-1.6s.8.6 1 1.6c.2 1 .4 2.1.9 3 .4.7 1.2.6 1.6-.1.6-1 .9-2.2 1.4-3.4.9-2.2 1.6-4.5 1.6-6.7 0-2.7-1.3-4.7-3.6-5.3C15.4 3.7 13.7 4.2 12 5.5Z"/>
+      </svg>
+      <span class="loader__brand">Dant<span>Setu</span></span>
+      <span class="loader__bar"><i></i></span>
+    </div>
+  </div>
+
   <!-- ===== Header / Nav ===== -->
   <header class="site-header" id="siteHeader">
     <div class="container nav">
@@ -29,6 +41,7 @@
         <a href="#product">Product</a>
         <a href="#roles">For Your Team</a>
         <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
         <a href="#testimonials">Testimonials</a>
         <a class="btn btn--primary btn--sm nav__cta" href="#contact">Book a Demo</a>
       </nav>
@@ -94,6 +107,7 @@
           </div>
           <div class="device__screen">
             <img src="assets/img/screens/app-web.png" alt="DantSetu web dashboard showing a patient's interactive dental chart and medical records" loading="eager" />
+            <span class="device__sheen" aria-hidden="true"></span>
           </div>
           <span class="device__glow" aria-hidden="true"></span>
         </figure>
@@ -154,7 +168,7 @@
       <div class="container">
         <div class="section__head reveal">
           <p class="eyebrow">What DantSetu does</p>
-          <h2>Everything a busy practice needs,<br />nothing it doesn't</h2>
+          <h2>Everything a busy practice needs, nothing it doesn't</h2>
           <p class="section__lead">Purpose-built for dental clinics — from single practices to multi-clinic groups.</p>
         </div>
 
@@ -321,6 +335,56 @@
       </div>
     </section>
 
+    <!-- ===== Pricing ===== -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Simple pricing</p>
+          <h2>One plan per practice, no surprises</h2>
+          <p class="section__lead">Every plan includes appointments, records, billing and role-based access. Pay yearly, cancel anytime.</p>
+        </div>
+        <div class="pricing">
+          <article class="price-card reveal">
+            <h3>Single Clinic</h3>
+            <p class="price-card__for">For one clinic branch</p>
+            <p class="price-card__price"><sup>₹</sup>9,999<span>/yr</span></p>
+            <ul class="price-card__list">
+              <li>1 clinic branch</li>
+              <li>All core features included</li>
+              <li>Role-based team logins</li>
+              <li>Cloud-secure patient records</li>
+            </ul>
+            <a class="btn btn--soft btn--block" href="#contact">Get started</a>
+          </article>
+          <article class="price-card price-card--featured reveal">
+            <span class="price-card__badge">Most popular</span>
+            <h3>Growing Practice</h3>
+            <p class="price-card__for">For two clinic branches</p>
+            <p class="price-card__price"><sup>₹</sup>12,999<span>/yr</span></p>
+            <ul class="price-card__list">
+              <li>2 clinic branches</li>
+              <li>Everything in Single Clinic</li>
+              <li>Central multi-clinic console</li>
+              <li>Per-clinic branding</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#contact">Get started</a>
+          </article>
+          <article class="price-card reveal">
+            <h3>Clinic Group</h3>
+            <p class="price-card__for">For 3 or more clinic branches</p>
+            <p class="price-card__price price-card__price--custom">Custom</p>
+            <ul class="price-card__list">
+              <li>3+ clinic branches</li>
+              <li>Everything in Growing Practice</li>
+              <li>Tailored onboarding &amp; migration</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="btn btn--soft btn--block" href="#contact">Customize with us</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Testimonials ===== -->
     <section class="section section--tint" id="testimonials">
       <div class="container">
@@ -328,22 +392,43 @@
           <p class="eyebrow">Loved by clinics</p>
           <h2>What dental teams say</h2>
         </div>
-        <div class="cards cards--quotes">
-          <blockquote class="quote reveal">
-            <div class="quote__stars" aria-hidden="true">★★★★★</div>
-            <p>"Our receptionists picked it up in a day. Front desk chaos is gone and nothing slips through."</p>
-            <footer><span class="quote__avatar" aria-hidden="true">A</span><span><strong>Dr. Anjali Mehta</strong><em>Lead Dentist</em></span></footer>
-          </blockquote>
-          <blockquote class="quote reveal">
-            <div class="quote__stars" aria-hidden="true">★★★★★</div>
-            <p>"Managing three clinics from one place finally feels effortless. The role separation is spot on."</p>
-            <footer><span class="quote__avatar" aria-hidden="true">R</span><span><strong>Dr. Rahul Verma</strong><em>Practice Owner</em></span></footer>
-          </blockquote>
-          <blockquote class="quote reveal">
-            <div class="quote__stars" aria-hidden="true">★★★★★</div>
-            <p>"Treatment plans and billing in the same flow saves us hours every week."</p>
-            <footer><span class="quote__avatar" aria-hidden="true">S</span><span><strong>Sneha Iyer</strong><em>Clinic Manager</em></span></footer>
-          </blockquote>
+        <div class="slider reveal" id="quoteSlider">
+          <div class="slider__track" id="quoteTrack" tabindex="0" aria-label="Testimonials carousel">
+            <blockquote class="quote">
+              <div class="quote__stars" aria-hidden="true">★★★★★</div>
+              <p>"Our receptionists picked it up in a day. Front desk chaos is gone and nothing slips through."</p>
+              <footer><span class="quote__avatar" aria-hidden="true">A</span><span><strong>Dr. Anjali Mehta</strong><em>Lead Dentist</em></span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <div class="quote__stars" aria-hidden="true">★★★★★</div>
+              <p>"Managing three clinics from one place finally feels effortless. The role separation is spot on."</p>
+              <footer><span class="quote__avatar" aria-hidden="true">R</span><span><strong>Dr. Rahul Verma</strong><em>Practice Owner</em></span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <div class="quote__stars" aria-hidden="true">★★★★★</div>
+              <p>"Treatment plans and billing in the same flow saves us hours every week."</p>
+              <footer><span class="quote__avatar" aria-hidden="true">S</span><span><strong>Sneha Iyer</strong><em>Clinic Manager</em></span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <div class="quote__stars" aria-hidden="true">★★★★★</div>
+              <p>"The interactive dental chart is the best I've used — my whole treatment plan lives on one screen."</p>
+              <footer><span class="quote__avatar" aria-hidden="true">K</span><span><strong>Dr. Kavya Nair</strong><em>Orthodontist</em></span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <div class="quote__stars" aria-hidden="true">★★★★★</div>
+              <p>"Switching was painless. Records came across cleanly and the team barely needed training."</p>
+              <footer><span class="quote__avatar" aria-hidden="true">V</span><span><strong>Vikram Shah</strong><em>Operations Head</em></span></footer>
+            </blockquote>
+          </div>
+          <div class="slider__nav">
+            <button class="slider__btn" id="quotePrev" aria-label="Previous testimonials">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            </button>
+            <div class="slider__dots" id="quoteDots" role="tablist" aria-label="Testimonial pages"></div>
+            <button class="slider__btn" id="quoteNext" aria-label="Next testimonials">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -374,6 +459,10 @@
             <input id="email" name="email" type="email" placeholder="you@clinic.com" autocomplete="email" required />
           </div>
           <div class="field">
+            <label for="phone">Mobile number</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+          </div>
+          <div class="field">
             <label for="clinic">Clinic name</label>
             <input id="clinic" name="clinic" type="text" placeholder="Your practice" autocomplete="organization" />
           </div>
@@ -400,6 +489,7 @@
         <a href="#features">Features</a>
         <a href="#roles">For your team</a>
         <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
       </nav>
       <nav class="footer__col" aria-label="Company">
         <h4>Company</h4>
