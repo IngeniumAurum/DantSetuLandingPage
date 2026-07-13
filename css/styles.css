@@ -233,7 +233,7 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 .brand__text { font-family: var(--font-head); font-size: 1.28rem; color: var(--heading); letter-spacing: -0.02em; }
 .brand__text span { color: var(--blue); }
 
-.nav__links { display: flex; align-items: center; gap: 1.7rem; }
+.nav__links { display: flex; align-items: center; gap: clamp(.9rem, 1.9vw, 1.7rem); }
 .nav__links a { font-weight: 600; color: var(--ink); font-size: .93rem; transition: color .2s ease; }
 .nav__links a:not(.btn) { position: relative; padding: .3em 0; }
 /* Animated underline on nav links */
@@ -737,7 +737,7 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
   .roles, .cta__inner { grid-template-columns: 1fr; gap: 2.4rem; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
 }
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .nav__links {
     position: fixed; inset: 70px 0 auto 0;
     flex-direction: column; align-items: stretch; gap: 0;
