@@ -93,36 +93,86 @@
 
       <div class="cards">
         <article class="card">
-          <div class="card__icon">🗓️</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="M8 13h3M8 16.5h6"/></svg>
+          </div>
           <h3>Smart Appointments</h3>
           <p>Schedule and track visits across every chair and clinic, with appointment details and prescriptions attached to each one.</p>
         </article>
         <article class="card">
-          <div class="card__icon">🦷</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2c-1.7-1.2-3.3-1.6-4.7-1.2C5.2 3.6 4 5.4 4 7.9c0 2 .7 4.1 1.5 6.1.5 1.1.8 2.2 1.3 3.1.4.7 1.2.7 1.6 0 .5-.9.7-1.9.9-2.8.2-.9.4-1.5.7-1.5s.5.6.7 1.5c.2.9.4 1.9.9 2.8.4.7 1.2.7 1.6 0 .5-.9.8-2 1.3-3.1.8-2 1.5-4.1 1.5-6.1 0-2.5-1.2-4.3-3.3-4.9-1.4-.4-3 0-4.7 1.2Z"/></svg>
+          </div>
           <h3>Interactive Dental Chart</h3>
           <p>Plan treatment tooth-by-tooth on a visual chart, log procedures and follow each case from diagnosis to completion.</p>
         </article>
         <article class="card">
-          <div class="card__icon">📋</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h8a2 2 0 0 1 2 2V20a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20V5.5a2 2 0 0 1 2-2Z"/><path d="M9 3.5V6h6V3.5M9.5 11h5M9.5 14.5h5"/></svg>
+          </div>
           <h3>Records, Rx &amp; Reports</h3>
           <p>Medical records, prescriptions and reports — including X-rays and documents — kept together for every patient.</p>
         </article>
         <article class="card">
-          <div class="card__icon">💳</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 9.5h19M6 14.5h4"/></svg>
+          </div>
           <h3>Billing &amp; Payments</h3>
           <p>Generate patient bills, collect payments and track pending treatment balances, then close out visits in a few taps.</p>
         </article>
         <article class="card">
-          <div class="card__icon">🏥</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l7-4 7 4v14"/><path d="M17 11h4v10M3 21h18M7 9v0M7 13v0M7 17v0M13 9v0M13 13v0M13 17v0"/></svg>
+          </div>
           <h3>Multi-clinic &amp; Staff</h3>
           <p>Run multiple clinics under one roof, invite staff and apply per-clinic branding — all from one central console.</p>
         </article>
         <article class="card">
-          <div class="card__icon">📊</div>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7.5 15l3.5-4 3 2.5L20 7"/></svg>
+          </div>
           <h3>Analytics &amp; Plans</h3>
           <p>See performance on an analytics dashboard and manage subscription tiers with limits on clinics and users.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Statement ===== -->
+  <section class="statement">
+    <div class="container">
+      <p class="statement__line reveal">One platform.</p>
+      <p class="statement__line reveal">Every clinic.</p>
+      <p class="statement__line statement__accent reveal">Total calm.</p>
+    </div>
+  </section>
+
+  <!-- ===== Showcase (app screenshots) ===== -->
+  <section class="section showcase" id="showcase">
+    <div class="section__head reveal">
+      <p class="eyebrow">See it in action</p>
+      <h2>Designed to feel effortless</h2>
+      <p class="section__lead">A clean interface from the front desk to the dental chair — on web and mobile.</p>
+    </div>
+    <div class="container showcase__grid">
+      <figure class="device device--browser reveal">
+        <div class="device__bar"><span></span><span></span><span></span></div>
+        <div class="device__screen">
+          <img src="assets/img/screens/app-web.png" alt="DantSetu web dashboard"
+               onerror="this.closest('.device').classList.add('is-empty'); this.remove()" />
+          <span class="device__ph">Drop <code>app-web.png</code> here</span>
+        </div>
+        <figcaption>Web dashboard</figcaption>
+      </figure>
+      <figure class="device device--phone reveal">
+        <div class="device__notch"></div>
+        <div class="device__screen">
+          <img src="assets/img/screens/app-mobile.png" alt="DantSetu mobile app"
+               onerror="this.closest('.device').classList.add('is-empty'); this.remove()" />
+          <span class="device__ph">Drop <code>app-mobile.png</code></span>
+        </div>
+        <figcaption>Mobile app</figcaption>
+      </figure>
     </div>
   </section>
 

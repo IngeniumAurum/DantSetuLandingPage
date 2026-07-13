@@ -61,10 +61,12 @@
       });
     });
   }
-  stagger(".cards");        // feature + testimonial cards
-  stagger(".steps");        // how-it-works
-  stagger(".roles__list");  // role rows
-  stagger(".stats__grid");  // stat tiles
+  stagger(".cards");             // feature + testimonial cards
+  stagger(".steps");             // how-it-works
+  stagger(".roles__list");       // role rows
+  stagger(".stats__grid");       // stat tiles
+  stagger(".showcase__grid");    // device mockups
+  stagger(".statement .container"); // big statement lines
 
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
