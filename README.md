@@ -8,15 +8,30 @@ It's a static site (no build step): plain HTML, CSS and vanilla JavaScript.
 ## Structure
 
 ```
-index.html          # page markup (nav, hero, features, roles, steps, testimonials, CTA, footer)
-css/styles.css      # styles — brand colors mirror the app theme
-js/main.js          # mobile nav, scroll reveals, stat counters, demo-form validation
-assets/img/         # hero photo goes here (see assets/img/README.md)
+index.html              # page markup (nav, hero, features, roles, steps, testimonials, CTA, footer)
+css/styles.css          # styles — brand colors mirror the app theme
+js/main.js              # entry point — wires up the feature modules
+js/features/            # one file per interaction (single responsibility)
+  footerYear.js         #   footer copyright year
+  themeToggle.js        #   light/dark theme toggle (remembers choice)
+  mobileNav.js          #   mobile navigation menu
+  scrollReveal.js       #   reveal-on-scroll + stagger
+  statCounters.js       #   animated stat counters
+  demoForm.js           #   demo-form validation
+js/utils/               # shared, reusable helpers
+  dom.js                #   query helpers
+  observer.js           #   IntersectionObserver abstraction (reveal + counters reuse it)
+assets/img/             # hero photo goes here (see assets/img/README.md)
 ```
+
+The JavaScript is organised as native **ES modules**: `main.js` imports each
+feature and calls its `init()`. Adding a new interaction means dropping a
+module in `js/features/` and listing it in `main.js` — nothing else changes.
 
 ## Run it
 
-No tooling required — open `index.html` in a browser, or serve the folder:
+No build step required, but because the scripts are ES modules the page must
+be **served over HTTP** (browsers block module loading from `file://`):
 
 ```bash
 python3 -m http.server 8000
