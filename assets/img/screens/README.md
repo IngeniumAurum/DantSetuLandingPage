@@ -9,5 +9,9 @@ The "See it in action" section on the landing page loads two screenshots:
 
 Drop your app screenshots here with those exact filenames. Each frame shows a
 labelled placeholder until its file exists, then displays the screenshot
-automatically — no code change needed. Images are cropped with `object-fit:
-cover`, so a clean full-screen capture works best.
+automatically — no code change needed.
+
+Images are fitted with `object-fit: contain` inside a padded frame, so **any
+size works**: the whole screenshot is shown (never cropped), and mismatched
+ratios simply get clean spacing/matting around them. The sizes above are a
+guide for the tightest fit, not a requirement.

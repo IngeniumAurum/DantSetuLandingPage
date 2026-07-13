@@ -266,9 +266,11 @@ h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
 }
 .device__screen {
   position: relative; overflow: hidden; background: var(--bg-tint);
-  display: grid; place-items: center;
+  display: grid; place-items: center; padding: 12px;
 }
-.device__screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* contain (not cover) so the whole screenshot shows at any size, with the
+   padding above giving clean spacing/matting around mismatched ratios. */
+.device__screen img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 6px; }
 .device__ph {
   position: absolute; color: var(--muted); font-weight: 600; font-size: .95rem; text-align: center; padding: 1rem;
 }
