@@ -6,6 +6,26 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Theme toggle — respects OS preference, remembers the user's choice
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("themeToggle");
+  try {
+    var saved = localStorage.getItem("dantsetu-theme");
+    if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+  } catch (e) {}
+  function currentTheme() {
+    var attr = root.getAttribute("data-theme");
+    if (attr) return attr;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("dantsetu-theme", next); } catch (e) {}
+    });
+  }
+
   // Mobile nav toggle
   var toggle = document.getElementById("navToggle");
   var links = document.getElementById("navLinks");
