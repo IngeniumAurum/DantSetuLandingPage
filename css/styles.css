@@ -345,27 +345,63 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 .footer__bottom p { margin: 0; font-size: .86rem; color: #8ea4bb; }
 
 /* ===== Reveal animation ===== */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.is-visible { opacity: 1; transform: none; }
+/* Smooth "settle" easing + a soft blur-in reads more premium than a plain fade.
+   Children of a revealed group are staggered via --i (set in main.js). */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(.985);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity .75s cubic-bezier(.16, 1, .3, 1),
+    transform .75s cubic-bezier(.16, 1, .3, 1),
+    filter .75s ease;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.reveal.is-visible { opacity: 1; transform: none; filter: none; }
+/* Directional variants for side-by-side sections */
+.reveal--left  { transform: translateX(-40px); }
+.reveal--right { transform: translateX(40px); }
+.reveal--left.is-visible, .reveal--right.is-visible { transform: none; }
 
-/* Hero entrance — staggered fade/slide on load */
-.hero__in { opacity: 0; transform: translateY(20px); animation: heroIn .7s cubic-bezier(.22,.61,.36,1) forwards; animation-delay: var(--d, 0ms); }
-@keyframes heroIn { to { opacity: 1; transform: none; } }
+/* Hero entrance — staggered rise with a soft blur-in */
+.hero__in {
+  opacity: 0; transform: translateY(26px); filter: blur(8px);
+  animation: heroIn .9s cubic-bezier(.16, 1, .3, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes heroIn { to { opacity: 1; transform: none; filter: none; } }
 
 /* Header slides down on first paint */
-.site-header { animation: dropIn .5s ease both; }
+.site-header { animation: dropIn .6s cubic-bezier(.16, 1, .3, 1) both; }
 @keyframes dropIn { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
-/* Card icon springs on card hover */
-.card:hover .card__icon { transform: translateY(-3px) rotate(-4deg) scale(1.06); }
-.card__icon { transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+/* Slow Ken-Burns drift on the hero photo so the background feels alive */
+.hero__photo { animation: kenburns 26s ease-in-out infinite alternate; }
+@keyframes kenburns {
+  from { transform: scale(1.08) translate(0, 0); }
+  to   { transform: scale(1.16) translate(-2.5%, -2%); }
+}
+
+/* Card lift + springy icon on hover */
+.card:hover .card__icon { transform: translateY(-3px) rotate(-4deg) scale(1.08); }
+.card__icon { transition: transform .3s cubic-bezier(.34, 1.56, .64, 1); }
+
+/* Shine sweep across primary buttons on hover */
+.btn--primary { position: relative; overflow: hidden; }
+.btn--primary::after {
+  content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-18deg); transition: left .6s ease;
+}
+.btn--primary:hover::after { left: 140%; }
 
 /* Amber underline sweep under section headings */
 .section__head h2 { position: relative; display: inline-block; }
 .section__head h2::after {
   content: ""; display: block; height: 3px; width: 54px; margin: .6rem auto 0;
   border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--amber));
-  transform: scaleX(0); transform-origin: center; transition: transform .5s ease .15s;
+  transform: scaleX(0); transform-origin: center; transition: transform .6s cubic-bezier(.16,1,.3,1) .2s;
 }
 .section__head.is-visible h2::after { transform: scaleX(1); }
 
@@ -397,9 +433,14 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { transition: none; opacity: 1; transform: none; }
-  .hero__in { animation: none; opacity: 1; transform: none; }
+  .reveal { transition: none; opacity: 1; transform: none; filter: none; }
+  .hero__in { animation: none; opacity: 1; transform: none; filter: none; }
+  .hero__photo { animation: none; transform: scale(1.08); }
   .site-header { animation: none; }
   .section__head h2::after { transition: none; transform: scaleX(1); }
-  *, *::before, *::after { animation-duration: .001ms !important; transition: none !important; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
 }

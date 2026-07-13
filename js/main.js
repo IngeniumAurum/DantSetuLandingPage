@@ -49,6 +49,23 @@
   );
   revealTargets.forEach(function (el) { el.classList.add("reveal"); });
 
+  // Directional entrances for the side-by-side roles block
+  var rolesCopy = document.querySelector(".roles__copy");
+  if (rolesCopy) rolesCopy.classList.add("reveal--left");
+
+  // Stagger children within a group so a row cascades instead of popping at once
+  function stagger(selector) {
+    document.querySelectorAll(selector).forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        if (child.classList.contains("reveal")) child.style.setProperty("--i", i);
+      });
+    });
+  }
+  stagger(".cards");        // feature + testimonial cards
+  stagger(".steps");        // how-it-works
+  stagger(".roles__list");  // role rows
+  stagger(".stats__grid");  // stat tiles
+
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -57,7 +74,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
     revealTargets.forEach(function (el) { io.observe(el); });
   } else {
     revealTargets.forEach(function (el) { el.classList.add("is-visible"); });
