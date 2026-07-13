@@ -13,11 +13,11 @@ out of the box — replace it with your real photo (same filename).
 
 ## About the blur
 
-The photo is rendered with a **light CSS blur** (`filter: blur(5px)` plus a
-slight scale and a translucent navy overlay — see `.hero__photo` /
-`.hero__overlay` in `css/styles.css`). At this radius the image stays clearly
-visible while faces are still softened. To hide faces completely again, raise
-the `blur(5px)` value (≈`12–14px`); to sharpen it, lower it.
+The photo is rendered with a **CSS blur** (`filter: blur(9px)` plus a slight
+scale and a translucent navy overlay — see `.hero__photo` / `.hero__overlay` in
+`css/styles.css`). At this radius the clinic scene stays clearly readable while
+faces are no longer identifiable. To sharpen it, lower the value (`~5px`); to
+obscure faces even more, raise it (`~12–14px`).
 
 If no file is present, the hero falls back to a navy → blue gradient, so the
 page always looks complete.
