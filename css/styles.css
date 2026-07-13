@@ -245,7 +245,7 @@ h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
 .section__lead { color: var(--muted); font-size: 1.12rem; margin: .4rem 0 0; }
 
 /* ===== Statement (big centered Apple-style moment) ===== */
-.statement { padding: clamp(90px, 15vw, 180px) 0; text-align: center; background: var(--bg); }
+.statement { padding: clamp(48px, 7vw, 84px) 0; text-align: center; background: var(--bg-tint); }
 .statement__line {
   font-size: clamp(2.4rem, 6.5vw, 5rem); font-weight: 800; line-height: 1.04;
   letter-spacing: -0.035em; color: var(--heading); margin: 0;
