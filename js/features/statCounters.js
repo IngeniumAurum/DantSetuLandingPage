@@ -1,14 +1,14 @@
 // Animated stat counters that count up once, the first time they scroll
-// into view.
+// into view (or show their final value immediately under reduced-motion).
 
 import { qsa } from "../utils/dom.js";
 import { observeVisibility } from "../utils/observer.js";
+import { prefersReducedMotion } from "../utils/env.js";
 
-const DURATION_MS = 1200;
+const DURATION_MS = 1400;
 
 function finalText(el) {
-  const target = parseInt(el.getAttribute("data-count"), 10) || 0;
-  return target + (el.getAttribute("data-suffix") || "");
+  return (el.getAttribute("data-count") || "0") + (el.getAttribute("data-suffix") || "");
 }
 
 function animate(el) {
@@ -36,6 +36,11 @@ function animate(el) {
 export function init() {
   const counters = qsa(".stat__num[data-count]");
   if (!counters.length) return;
+
+  if (prefersReducedMotion()) {
+    counters.forEach((el) => (el.textContent = finalText(el)));
+    return;
+  }
 
   observeVisibility(counters, (el, isVisible) => isVisible && animate(el), {
     once: true,

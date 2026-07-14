@@ -9,19 +9,31 @@
 // Loaded as `type="module"`, so it's deferred automatically — the DOM is
 // ready by the time these run.
 
+import * as pageLoader from "./features/pageLoader.js";
 import * as footerYear from "./features/footerYear.js";
 import * as themeToggle from "./features/themeToggle.js";
+import * as headerScroll from "./features/headerScroll.js";
 import * as mobileNav from "./features/mobileNav.js";
+import * as navHighlight from "./features/navHighlight.js";
 import * as scrollReveal from "./features/scrollReveal.js";
 import * as statCounters from "./features/statCounters.js";
+import * as cardSpotlight from "./features/cardSpotlight.js";
+import * as heroTilt from "./features/heroTilt.js";
+import * as testimonialSlider from "./features/testimonialSlider.js";
 import * as demoForm from "./features/demoForm.js";
 
 const features = [
+  pageLoader,
   footerYear,
   themeToggle,
+  headerScroll,
   mobileNav,
+  navHighlight,
   scrollReveal,
   statCounters,
+  cardSpotlight,
+  heroTilt,
+  testimonialSlider,
   demoForm,
 ];
 

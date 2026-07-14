@@ -15,7 +15,8 @@ export function init() {
     toggle.setAttribute("aria-expanded", String(open));
   });
 
+  // closest("a") so taps on markup inside a link still close the menu.
   links.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") close();
+    if (e.target.closest("a")) close();
   });
 }

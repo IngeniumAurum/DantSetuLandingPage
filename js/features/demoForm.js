@@ -1,6 +1,7 @@
 // Demo request form: client-side validation with a friendly confirmation.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\+?[0-9][0-9\s\-()]{8,14}$/;
 
 // Read a field's trimmed value via the form controls collection.
 // NOTE: never read controls as `form.<name>` — names like "name" collide
@@ -22,9 +23,15 @@ export function init() {
 
     const name = fieldValue(form, "name");
     const email = fieldValue(form, "email");
+    const phone = fieldValue(form, "phone");
 
     if (!name || !EMAIL_RE.test(email)) {
       note.textContent = "Please add your name and a valid work email.";
+      note.className = "form__note err";
+      return;
+    }
+    if (!PHONE_RE.test(phone)) {
+      note.textContent = "Please add a valid mobile number so we can reach you.";
       note.className = "form__note err";
       return;
     }

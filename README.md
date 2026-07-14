@@ -12,15 +12,22 @@ index.html              # page markup (nav, hero, features, roles, steps, testim
 css/styles.css          # styles — brand colors mirror the app theme
 js/main.js              # entry point — wires up the feature modules
 js/features/            # one file per interaction (single responsibility)
+  pageLoader.js         #   tooth loader hide/fade
   footerYear.js         #   footer copyright year
   themeToggle.js        #   light/dark theme toggle (remembers choice)
+  headerScroll.js       #   header elevation on scroll
   mobileNav.js          #   mobile navigation menu
+  navHighlight.js       #   active-section nav highlighting
   scrollReveal.js       #   reveal-on-scroll + stagger
   statCounters.js       #   animated stat counters
+  cardSpotlight.js      #   cursor spotlight on feature cards
+  heroTilt.js           #   3D tilt + glare on the hero screenshot
+  testimonialSlider.js  #   testimonial carousel (arrows, dots, drag)
   demoForm.js           #   demo-form validation
 js/utils/               # shared, reusable helpers
   dom.js                #   query helpers
-  observer.js           #   IntersectionObserver abstraction (reveal + counters reuse it)
+  env.js                #   reduced-motion / pointer preference checks
+  observer.js           #   IntersectionObserver abstraction (reveal, counters, nav reuse it)
 assets/img/             # hero photo goes here (see assets/img/README.md)
 ```
 
