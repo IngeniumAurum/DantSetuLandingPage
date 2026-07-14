@@ -914,6 +914,16 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
      below its label width and clip the text ("Book a Demo" → "ook a Demo"). */
   .hero__actions { flex-direction: column; align-items: stretch; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Bring the floating notification cards back over the hero screenshot on
+     phones (they are hidden on tablet widths). Scaled down and tucked into
+     the device corners so they read as callouts without overflowing. */
+  .float-card { display: flex; padding: .5rem .65rem; border-radius: 12px; gap: .5rem; max-width: 62%; }
+  .float-card__icon { width: 26px; height: 26px; border-radius: 8px; }
+  .float-card__body strong { font-size: .72rem; }
+  .float-card__body em { font-size: .64rem; }
+  .float-card--left  { left: 3%;  top: 11%; }
+  .float-card--right { right: 3%; bottom: 16%; }
 }
 
 /* ===== Reduced motion ===== */
