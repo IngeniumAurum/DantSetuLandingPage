@@ -8,15 +8,37 @@ It's a static site (no build step): plain HTML, CSS and vanilla JavaScript.
 ## Structure
 
 ```
-index.html          # page markup (nav, hero, features, roles, steps, testimonials, CTA, footer)
-css/styles.css      # styles — brand colors mirror the app theme
-js/main.js          # mobile nav, scroll reveals, stat counters, demo-form validation
-assets/img/         # hero photo goes here (see assets/img/README.md)
+index.html              # page markup (nav, hero, features, roles, steps, testimonials, CTA, footer)
+css/styles.css          # styles — brand colors mirror the app theme
+js/main.js              # entry point — wires up the feature modules
+js/features/            # one file per interaction (single responsibility)
+  pageLoader.js         #   tooth loader hide/fade
+  footerYear.js         #   footer copyright year
+  themeToggle.js        #   light/dark theme toggle (remembers choice)
+  headerScroll.js       #   header elevation on scroll
+  mobileNav.js          #   mobile navigation menu
+  navHighlight.js       #   active-section nav highlighting
+  scrollReveal.js       #   reveal-on-scroll + stagger
+  statCounters.js       #   animated stat counters
+  cardSpotlight.js      #   cursor spotlight on feature cards
+  heroTilt.js           #   3D tilt + glare on the hero screenshot
+  testimonialSlider.js  #   testimonial carousel (arrows, dots, drag)
+  demoForm.js           #   demo-form validation
+js/utils/               # shared, reusable helpers
+  dom.js                #   query helpers
+  env.js                #   reduced-motion / pointer preference checks
+  observer.js           #   IntersectionObserver abstraction (reveal, counters, nav reuse it)
+assets/img/             # hero photo goes here (see assets/img/README.md)
 ```
+
+The JavaScript is organised as native **ES modules**: `main.js` imports each
+feature and calls its `init()`. Adding a new interaction means dropping a
+module in `js/features/` and listing it in `main.js` — nothing else changes.
 
 ## Run it
 
-No tooling required — open `index.html` in a browser, or serve the folder:
+No build step required, but because the scripts are ES modules the page must
+be **served over HTTP** (browsers block module loading from `file://`):
 
 ```bash
 python3 -m http.server 8000
