@@ -737,25 +737,30 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 
 /* ===== Testimonials ===== */
 .quote {
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
   margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.7rem; box-shadow: var(--card-shadow);
+  padding: 2.2rem 1.9rem 2.4rem; box-shadow: var(--card-shadow);
   transition: transform .4s var(--ease-out), box-shadow .4s ease, border-color .4s ease;
 }
 .quote:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-lift); border-color: rgba(59, 130, 246, .4); }
-.quote__stars { color: var(--amber); letter-spacing: .18em; font-size: .85rem; margin-bottom: .9rem; }
-.quote p { color: var(--ink); font-size: 1rem; margin: 0 0 1.3rem; flex: 1; }
-.quote footer { display: flex; align-items: center; gap: .75rem; }
-.quote footer strong { display: block; color: var(--heading); font-family: var(--font-head); font-size: .93rem; }
-.quote footer em { font-style: normal; color: var(--muted); font-size: .84rem; }
-.quote__avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  display: grid; place-items: center; flex: 0 0 auto;
-  color: #fff; font-weight: 800; font-family: var(--font-head);
-  background: linear-gradient(135deg, var(--blue), var(--indigo));
+.quote__mark {
+  align-self: flex-start;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3.6rem; line-height: .7; font-weight: 700;
+  color: var(--blue); margin-bottom: .5rem;
 }
-.quote:nth-child(2) .quote__avatar { background: linear-gradient(135deg, var(--amber), #d97706); }
-.quote:nth-child(3) .quote__avatar { background: linear-gradient(135deg, var(--indigo), var(--navy)); }
+.quote__name { display: block; color: var(--heading); font-family: var(--font-head); font-size: 1.02rem; }
+.quote__role { font-style: normal; color: var(--muted); font-size: .88rem; margin-top: .2rem; }
+.quote p { color: var(--ink); font-size: 1rem; line-height: 1.65; margin: 1.4rem 0 0; }
+.quote__avatar {
+  width: 74px; height: 74px; border-radius: 50%; margin-bottom: 1rem;
+  display: grid; place-items: center; flex: 0 0 auto;
+  color: #fff; font-weight: 800; font-size: 1.5rem; font-family: var(--font-head);
+  background: linear-gradient(135deg, var(--blue), var(--indigo));
+  box-shadow: 0 8px 20px -8px rgba(59, 130, 246, .55);
+}
+.quote:nth-child(2) .quote__avatar { background: linear-gradient(135deg, var(--amber), #d97706); box-shadow: 0 8px 20px -8px rgba(245, 158, 11, .55); }
+.quote:nth-child(3) .quote__avatar { background: linear-gradient(135deg, var(--indigo), var(--navy)); box-shadow: 0 8px 20px -8px rgba(99, 102, 241, .55); }
 
 /* ===== Testimonial slider ===== */
 .slider { position: relative; }
