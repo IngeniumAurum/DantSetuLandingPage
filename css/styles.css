@@ -715,6 +715,18 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 .price-card__price sup { font-size: .5em; font-weight: 700; margin-right: .06em; vertical-align: .55em; }
 .price-card__price span { font-size: .42em; font-weight: 600; color: var(--muted); letter-spacing: 0; }
 .price-card__price--custom { font-size: 2.1rem; padding-top: .18em; }
+/* Launch-offer row: original price struck through + a savings pill */
+.price-card__offer { display: flex; align-items: center; gap: .55rem; margin: 0 0 .35rem; min-height: 1.4em; }
+.price-card__was {
+  color: var(--muted); font-weight: 600; font-size: 1.02rem;
+  text-decoration: line-through; text-decoration-color: rgba(148, 163, 184, .8);
+  font-variant-numeric: tabular-nums;
+}
+.price-card__save {
+  font-family: var(--font-head); font-weight: 700; font-size: .72rem; letter-spacing: .03em;
+  color: #16a34a; background: rgba(22, 163, 74, .13);
+  padding: .2em .6em; border-radius: 999px; white-space: nowrap;
+}
 .price-card__list {
   list-style: none; padding: 0; margin: 0 0 1.6rem;
   display: grid; gap: .55rem; flex: 1;
