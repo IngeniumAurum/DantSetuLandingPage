@@ -909,7 +909,10 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 @media (max-width: 560px) {
   .cards { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
-  .hero__actions .btn { flex: 1; }
+  /* Stack the hero CTAs full-width: forcing them side-by-side (flex:1) let the
+     primary button — which has overflow:hidden for its shine effect — shrink
+     below its label width and clip the text ("Book a Demo" → "ook a Demo"). */
+  .hero__actions { flex-direction: column; align-items: stretch; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
