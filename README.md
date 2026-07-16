@@ -24,16 +24,42 @@ js/features/            # one file per interaction (single responsibility)
   heroTilt.js           #   3D tilt + glare on the hero screenshot
   testimonialSlider.js  #   testimonial carousel (arrows, dots, drag)
   demoForm.js           #   demo-form validation
+  pricing.js            #   country-based pricing (renders cards from JSON)
+  contact.js            #   country-based email / phone in the footer & form
 js/utils/               # shared, reusable helpers
   dom.js                #   query helpers
   env.js                #   reduced-motion / pointer preference checks
   observer.js           #   IntersectionObserver abstraction (reveal, counters, nav reuse it)
+  geo.js                #   best-effort visitor country detection
+  config.js             #   memoised loader for js/data/pricing.json
+js/data/
+  pricing.json          #   prices + contact details per currency/region
 assets/img/             # hero photo goes here (see assets/img/README.md)
 ```
 
 The JavaScript is organised as native **ES modules**: `main.js` imports each
 feature and calls its `init()`. Adding a new interaction means dropping a
 module in `js/features/` and listing it in `main.js` — nothing else changes.
+
+## Country-based pricing & contact
+
+Pricing cards and the "Get in touch" email/phone adapt to the visitor's
+country, driven entirely by `js/data/pricing.json` — no build step, no backend.
+
+- **Data** — `pricing.json` holds a `countryToCurrency` map, per-currency
+  `currencies` formatting, each plan's `prices` per currency, and a `contact`
+  block (email / phone / phone-placeholder per currency, plus a `default`).
+- **Detection** — `js/utils/geo.js` resolves the country in priority order:
+  `?country=XX` URL override → cached choice → geo-IP lookup → browser locale →
+  the `defaultCountry` in the JSON (`IN`). It never throws.
+- **Progressive enhancement** — the page ships with static INR pricing and
+  contact details in `index.html`. The JS only *upgrades* them; if the JSON is
+  unreachable or JS is off, the static fallback stays intact.
+
+Add a market by dropping a currency into `currencies`, mapping its countries in
+`countryToCurrency`, and filling in each plan's `prices` plus the `contact`
+entry. Test any market locally with e.g. `?country=US`, `?country=GB`,
+`?country=AE`.
 
 ## Run it
 

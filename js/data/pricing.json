@@ -1,0 +1,146 @@
+{
+  "defaultCountry": "IN",
+  "note": "Launch pricing — pay yearly, cancel anytime.",
+
+  "countryToCurrency": {
+    "IN": "INR",
+    "US": "USD", "PR": "USD", "EC": "USD",
+    "GB": "GBP",
+    "AU": "AUD",
+    "CA": "CAD",
+    "SG": "SGD",
+    "AE": "AED", "SA": "AED", "QA": "AED", "KW": "AED", "OM": "AED", "BH": "AED",
+    "DE": "EUR", "FR": "EUR", "ES": "EUR", "IT": "EUR", "NL": "EUR",
+    "IE": "EUR", "PT": "EUR", "AT": "EUR", "BE": "EUR", "FI": "EUR"
+  },
+
+  "currencies": {
+    "INR": { "symbol": "₹", "locale": "en-IN", "position": "before" },
+    "USD": { "symbol": "$", "locale": "en-US", "position": "before" },
+    "GBP": { "symbol": "£", "locale": "en-GB", "position": "before" },
+    "EUR": { "symbol": "€", "locale": "en-IE", "position": "before" },
+    "AUD": { "symbol": "A$", "locale": "en-AU", "position": "before" },
+    "CAD": { "symbol": "C$", "locale": "en-CA", "position": "before" },
+    "SGD": { "symbol": "S$", "locale": "en-SG", "position": "before" },
+    "AED": { "symbol": "AED ", "locale": "en-AE", "position": "before" }
+  },
+
+  "period": "/yr",
+  "customLabel": "Custom",
+
+  "contact": {
+    "default": {
+      "email": "hello@dantsetu.com",
+      "phone": "+91 00000 00000",
+      "phonePlaceholder": "+91 98765 43210"
+    },
+    "byCurrency": {
+      "INR": {
+        "email": "hello@dantsetu.com",
+        "phone": "+91 00000 00000",
+        "phonePlaceholder": "+91 98765 43210"
+      },
+      "USD": {
+        "email": "us@dantsetu.com",
+        "phone": "+1 000 000 0000",
+        "phonePlaceholder": "+1 555 123 4567"
+      },
+      "GBP": {
+        "email": "uk@dantsetu.com",
+        "phone": "+44 00 0000 0000",
+        "phonePlaceholder": "+44 7700 900123"
+      },
+      "EUR": {
+        "email": "eu@dantsetu.com",
+        "phone": "+353 0 000 0000",
+        "phonePlaceholder": "+353 85 123 4567"
+      },
+      "AUD": {
+        "email": "au@dantsetu.com",
+        "phone": "+61 000 000 000",
+        "phonePlaceholder": "+61 412 345 678"
+      },
+      "CAD": {
+        "email": "ca@dantsetu.com",
+        "phone": "+1 000 000 0000",
+        "phonePlaceholder": "+1 555 123 4567"
+      },
+      "SGD": {
+        "email": "sg@dantsetu.com",
+        "phone": "+65 0000 0000",
+        "phonePlaceholder": "+65 8123 4567"
+      },
+      "AED": {
+        "email": "gulf@dantsetu.com",
+        "phone": "+971 0 000 0000",
+        "phonePlaceholder": "+971 50 123 4567"
+      }
+    }
+  },
+
+  "plans": [
+    {
+      "id": "single",
+      "name": "Single Clinic",
+      "for": "For one clinic branch",
+      "featured": false,
+      "badge": null,
+      "cta": { "label": "Get started", "href": "#contact", "style": "soft" },
+      "features": [
+        "1 clinic branch",
+        "All core features included",
+        "Role-based team logins",
+        "Cloud-secure patient records"
+      ],
+      "prices": {
+        "INR": { "was": 14999, "now": 9999,  "save": "Save 33%" },
+        "USD": { "was": 179,   "now": 119,   "save": "Save 33%" },
+        "GBP": { "was": 149,   "now": 99,    "save": "Save 33%" },
+        "EUR": { "was": 169,   "now": 115,   "save": "Save 32%" },
+        "AUD": { "was": 269,   "now": 179,   "save": "Save 33%" },
+        "CAD": { "was": 239,   "now": 159,   "save": "Save 33%" },
+        "SGD": { "was": 239,   "now": 159,   "save": "Save 33%" },
+        "AED": { "was": 659,   "now": 439,   "save": "Save 33%" }
+      }
+    },
+    {
+      "id": "growing",
+      "name": "Growing Practice",
+      "for": "For two clinic branches",
+      "featured": true,
+      "badge": "Most popular",
+      "cta": { "label": "Get started", "href": "#contact", "style": "primary" },
+      "features": [
+        "2 clinic branches",
+        "Everything in Single Clinic",
+        "Central multi-clinic console",
+        "Per-clinic branding"
+      ],
+      "prices": {
+        "INR": { "was": 18999, "now": 12999, "save": "Save 32%" },
+        "USD": { "was": 229,   "now": 159,   "save": "Save 31%" },
+        "GBP": { "was": 189,   "now": 129,   "save": "Save 32%" },
+        "EUR": { "was": 219,   "now": 149,   "save": "Save 32%" },
+        "AUD": { "was": 349,   "now": 239,   "save": "Save 32%" },
+        "CAD": { "was": 309,   "now": 209,   "save": "Save 32%" },
+        "SGD": { "was": 309,   "now": 209,   "save": "Save 32%" },
+        "AED": { "was": 849,   "now": 579,   "save": "Save 32%" }
+      }
+    },
+    {
+      "id": "group",
+      "name": "Clinic Group",
+      "for": "For 3 or more clinic branches",
+      "featured": false,
+      "badge": null,
+      "custom": true,
+      "cta": { "label": "Customize with us", "href": "#contact", "style": "soft" },
+      "features": [
+        "3+ clinic branches",
+        "Everything in Growing Practice",
+        "Tailored onboarding & migration",
+        "Priority support"
+      ]
+    }
+  ]
+}

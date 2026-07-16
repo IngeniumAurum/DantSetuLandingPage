@@ -21,6 +21,8 @@ import * as cardSpotlight from "./features/cardSpotlight.js";
 import * as heroTilt from "./features/heroTilt.js";
 import * as testimonialSlider from "./features/testimonialSlider.js";
 import * as demoForm from "./features/demoForm.js";
+import * as pricing from "./features/pricing.js";
+import * as contact from "./features/contact.js";
 
 const features = [
   pageLoader,
@@ -35,6 +37,8 @@ const features = [
   heroTilt,
   testimonialSlider,
   demoForm,
+  pricing,
+  contact,
 ];
 
 for (const feature of features) {
