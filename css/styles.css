@@ -269,6 +269,16 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 }
 @keyframes dropIn { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
+/* Thin reading-progress bar along the bottom edge of the sticky header
+   (scale driven by JS via --progress) */
+.scroll-progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2.5px;
+  background: linear-gradient(90deg, var(--blue), var(--indigo) 55%, var(--amber));
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
 .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 1rem; }
 .brand { display: inline-flex; align-items: center; gap: .55em; font-weight: 800; flex: 0 0 auto; }
 .brand__mark {
@@ -396,6 +406,15 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
 
 /* Hero product shot */
 .hero__shot { position: relative; margin-top: clamp(44px, 6vw, 72px); padding-bottom: clamp(56px, 7vw, 88px); }
+
+/* Scroll-driven 3D scene: the screenshot rests tilted back in perspective and
+   straightens as it scrolls toward the middle of the viewport (progress fed
+   by JS via --tilt, 1 = fully tilted → 0 = flat). */
+.hero__stage {
+  transform: perspective(1300px) rotateX(calc(var(--tilt, 0) * 16deg)) scale(calc(1 - var(--tilt, 0) * 0.05));
+  transform-origin: 50% 0;
+  will-change: transform;
+}
 
 /* Browser-framed screenshot */
 .device {
@@ -560,6 +579,41 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
   padding-bottom: .08em;
 }
 
+/* Holographic 3D tooth — a slowly spinning stack of outline layers.
+   JS (tooth3d.js) clones the single SVG into depth layers; without JS it
+   degrades to one flat outline, which still reads fine. */
+.tooth3d { display: grid; justify-items: center; margin-bottom: 1.9rem; perspective: 900px; }
+.tooth3d__spin {
+  position: relative;
+  width: clamp(96px, 12vw, 128px);
+  height: clamp(96px, 12vw, 128px);
+  color: var(--blue);
+  transform-style: preserve-3d;
+  animation: toothSpin 16s linear infinite;
+}
+.tooth3d__spin svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+}
+/* Front-most layer gets a soft glow so the hologram pops in both themes */
+.tooth3d__spin svg:first-child {
+  filter: drop-shadow(0 0 14px rgba(59, 130, 246, .55));
+}
+@keyframes toothSpin {
+  from { transform: rotateX(10deg) rotateY(0turn); }
+  to   { transform: rotateX(10deg) rotateY(1turn); }
+}
+.tooth3d__shadow {
+  width: 84px; height: 14px; margin-top: 14px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(59, 130, 246, .3), transparent);
+  animation: toothShadow 8s ease-in-out infinite;
+}
+@keyframes toothShadow {
+  0%, 100% { transform: scaleX(1); opacity: 1; }
+  50% { transform: scaleX(.8); opacity: .7; }
+}
+
 /* ===== Cards ===== */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
 .card {
@@ -577,7 +631,13 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
   opacity: 0; transition: opacity .35s ease;
   pointer-events: none;
 }
-.card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-lift); border-color: rgba(59, 130, 246, .45); }
+/* Hover lift plus a gentle 3D tilt toward the cursor (angles fed by JS
+   via --rx / --ry; they stay 0 for touch and reduced-motion users). */
+.card:hover {
+  transform: perspective(900px) translateY(-6px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  box-shadow: var(--card-shadow-lift);
+  border-color: rgba(59, 130, 246, .45);
+}
 .card:hover::before { opacity: 1; }
 .card__icon {
   width: 54px; height: 54px; border-radius: 15px;
@@ -951,6 +1011,9 @@ h3 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; }
   .site-header { animation: none; }
   .section__head h2::after { transition: none; transform: translateX(-50%) scaleX(1); }
   .ribbon__track { animation: none; }
+  .hero__stage { transform: none; }
+  .tooth3d__spin, .tooth3d__shadow { animation: none; }
+  .tooth3d__spin { transform: rotateX(10deg) rotateY(-24deg); }
   *, *::before, *::after {
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;

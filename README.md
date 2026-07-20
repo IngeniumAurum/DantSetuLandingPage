@@ -20,8 +20,11 @@ js/features/            # one file per interaction (single responsibility)
   navHighlight.js       #   active-section nav highlighting
   scrollReveal.js       #   reveal-on-scroll + stagger
   statCounters.js       #   animated stat counters
-  cardSpotlight.js      #   cursor spotlight on feature cards
+  cardSpotlight.js      #   cursor spotlight + 3D tilt on feature cards
   heroTilt.js           #   3D tilt + glare on the hero screenshot
+  heroScene.js          #   scroll-driven 3D perspective on the hero screenshot
+  tooth3d.js            #   holographic 3D tooth (statement section)
+  scrollProgress.js     #   reading-progress bar under the header
   testimonialSlider.js  #   testimonial carousel (arrows, dots, drag)
   demoForm.js           #   demo-form validation
 js/utils/               # shared, reusable helpers

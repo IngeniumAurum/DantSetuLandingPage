@@ -19,6 +19,9 @@ import * as scrollReveal from "./features/scrollReveal.js";
 import * as statCounters from "./features/statCounters.js";
 import * as cardSpotlight from "./features/cardSpotlight.js";
 import * as heroTilt from "./features/heroTilt.js";
+import * as heroScene from "./features/heroScene.js";
+import * as tooth3d from "./features/tooth3d.js";
+import * as scrollProgress from "./features/scrollProgress.js";
 import * as testimonialSlider from "./features/testimonialSlider.js";
 import * as demoForm from "./features/demoForm.js";
 
@@ -33,6 +36,9 @@ const features = [
   statCounters,
   cardSpotlight,
   heroTilt,
+  heroScene,
+  tooth3d,
+  scrollProgress,
   testimonialSlider,
   demoForm,
 ];
